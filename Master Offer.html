@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inquiry</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script> 
+    <link rel="stylesheet" href="style.css">
+    <script src="MasterOffer.js"></script>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> -->
+
+</head>
+<body>
+    <div class="row">
+        <div class="column" style="background-color:#aaa;">
+            <h2>Staff</h2>
+            <p>staff-1(just for example)</p>
+            <p>staff-2(just for example)</p>
+        </div>
+        <div class="column" style="background-color:#bbb;" id="assign_column">
+            <h2>Task</h2>
+            <p id="p">The Assigned Work</p>
+            <button id="my_Btn" onclick="assign()">Assign A Task</button>
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                  <!-- <span class="close" onclick="modalclose()">&times;</span> -->
+                  <input type="text"  id = "assign_text"placeholder="Task">
+                  <button id="btn_submit" onclick="assign_submit()">Assign</button>
+                </div>
+              
+              </div>
+        </div>
+        <div class="column" style="background-color:#ccc;">
+            <h2>Done Or Not</h2>
+            <input type="checkbox" name="Yes" value="yes" id="checkbox">Done</input>
+            <input type="checkbox" name="No" value="no" id="checkbox">Not Done</input>
+            <input type="checkbox" name="Yes" value="yes" id="checkbox">Done</input>
+            <input type="checkbox" name="No" value="no" id="checkbox">Not Done<br>
+        </div>
+</div>
+</body>
+</html>

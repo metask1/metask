@@ -1,0 +1,100 @@
+#heading{
+    text-align: center;
+    font-size: 30px;
+    font-family:'Brush Script MT', cursive;
+    font-weight: bold;
+    font-style: normal;
+    color: black;
+}
+#links{
+    color: black;
+    font-family: sans-serif;
+
+}
+#links:hover {
+    background-color: lightblue;
+    border-radius: 5px;
+}
+*{
+    
+    box-sizing: border-box;
+}
+  
+/* Create three equal columns that floats next to each other */
+.column {
+float: left;
+width: 230px;
+padding: 10px;
+overflow-y: scroll;
+overflow-x: hidden;
+ /* Should be removed. Only for demonstration */
+}
+
+
+.div {
+    float: left;
+    width: fit-content;
+    padding: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+     /* Should be removed. Only for demonstration */
+    }
+/* Clear floats after the columns */
+.row:after{
+content: "";
+display: table;
+clear: both;
+}
+
+#checkbox{
+    min-width: 0.75em;
+    min-height: 0.75em;
+    margin-right: 0.75em;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    display: inline-block;
+    font-family: 'Brush Script MT', cursive;
+}
+body{
+    background: -webkit-linear-gradient(25deg, #53514a, #524037, #8a6a78, #8338EC, #242e3f);
+
+}
+.container-fluid{
+    background: rgb(146, 216, 175);
+
+}
+.btn{
+    padding-right: 30px;
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.row {
+    display: table; /* Make the container element behave like a table */
+    width: 100%; /* Set full-width to expand the whole page */
+  }
+  
+.column {
+display: table-cell; /* Make elements inside the container behave like table cells */
+}
+
