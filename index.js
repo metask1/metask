@@ -1,8 +1,10 @@
+var User = localStorage.getItem('User')
+
 function Inquiry(){
     window.location = 'inquiry.html'
 }
-function Dispatch(){
-    window.location = 'Dispatch.html'
+function Order(){
+    window.location = 'offer.html'
 }
 function Offer(){
     window.location = 'Offer.html'
@@ -12,4 +14,7 @@ function login(){
 }
 function register(){
     window.location = "register.html"
+}
+function home(){
+    window.location = "index.html"
 }

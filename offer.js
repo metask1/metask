@@ -13,19 +13,19 @@ var srno = 0;
 function SelectAllData(){
     document.getElementById('tbody1').innerHTML = "";
     srno = 0;
-    firebase.database().ref('offer-inquiry').once('value',
+    firebase.database().ref('order-dispatch').once('value',
     function(AllRecords){
         AllRecords.forEach(
             function(CurrentRecord){
                 var date = CurrentRecord.val().date;
-                var offer_inq = CurrentRecord.val().inquiry;
-                var offer = CurrentRecord.val().offer;
-                var offer_date = CurrentRecord.val().offer_date;
-                var offer_value = CurrentRecord.val().offer_value;
+                var orderno = CurrentRecord.val().orderno;
+                // var order_date = CurrentRecord.val().offer;
+                var dispatch_date = CurrentRecord.val().dispatch_date;
+                var dispatch_value = CurrentRecord.val().dispatch_value;
                 var status = CurrentRecord.val().status;
                 // var sales_person = CurrentRecord.val().sales_person;
                 var company = CurrentRecord.val().company;
-                AddItemsToTable(date, offer_inq, offer, offer_date, offer_value, status, company);
+                AddItemsToTable(date, orderno,  dispatch_date, dispatch_value, status, company);
 
             }
         );
@@ -34,7 +34,7 @@ function SelectAllData(){
 window.onload = SelectAllData();
 
 var dataList =[];
-function AddItemsToTable(date, offer_inq, offer, offer_date, offer_value, status, company){
+function AddItemsToTable(date, orderno,  dispatch_date, dispatch_value, status, company){
     var tbody1 = document.getElementById('tbody1');
     var trow = document.createElement('tr');
     var td8 = document.createElement('td');
@@ -48,10 +48,10 @@ function AddItemsToTable(date, offer_inq, offer, offer_date, offer_value, status
     var td7 = document.createElement('td');
     
     td1.classList +="dateFeild"
-    td2.classList +="offer_inqFeild"
-    td3.classList +="offerFeild"
-    td4.classList +="offer_dateFeild"
-    td5.classList +="offer_valueFeild"
+    td2.classList +="ordernoFeild"
+    td3.classList +="order_dateFeild"
+    td4.classList +="dispatch_dateFeild"
+    td5.classList +="dispatch_valueFeild"
     td7.classList +="statusFeild"
     td6.classList +="companyFeild"
     // td9.classList +="salesFeild"
@@ -59,14 +59,14 @@ function AddItemsToTable(date, offer_inq, offer, offer_date, offer_value, status
 
 
 
-    dataList.push([date, offer_inq, company, offer_date,offer,offer_value,status])
+    dataList.push([date, orderno, company, dispatch_date,dispatch_value,status])
     td1.innerHTML = date;
-    td2.innerHTML = offer_inq;
+    td2.innerHTML = orderno;
     td3.innerHTML = company;
-    td4.innerHTML = offer_date;
-    td5.innerHTML = offer;
-    td6.innerHTML = offer_value;
-    td7.innerHTML = status;
+    td4.innerHTML = dispatch_date;
+    // td5.innerHTML = order_date;
+    td5.innerHTML = dispatch_value;
+    td6.innerHTML = status;
     td8.innerHTML = ++srno;
     // td9.innerHTML = sales_person;
 
@@ -78,7 +78,7 @@ function AddItemsToTable(date, offer_inq, offer, offer_date, offer_value, status
     trow.appendChild(td5); 
     trow.appendChild(td6); 
     // trow.appendChild(td9);
-    trow.appendChild(td7);
+    // trow.appendChild(td7);
 
 
     var ControlDiv = document.createElement("div");
@@ -92,12 +92,11 @@ function AddItemsToTable(date, offer_inq, offer, offer_date, offer_value, status
 
 
 }
-
+// var loader  = document.getElementsByClassName('loader').innerHTML
 var ModDate = document.getElementById('DateMod')
-var ModInquiry = document.getElementById('InqMod')
-var ModOfferNo = document.getElementById('ONMod')
-var ModOfferDate = document.getElementById('OFMod')
-var ModOfferValue = document.getElementById('OVMod')
+var ModOrderNo = document.getElementById('OrderMod')
+var ModDispatchDate = document.getElementById('DDMod')
+var ModDispatchValue = document.getElementById('DVMod')
 var ModStatus = document.getElementById('StatusMod')
 var ModCompany = document.getElementById('CompMod')
 // var ModSalesPerson = document.getElementById('SPMod')
@@ -114,13 +113,14 @@ function FillTboxes(index){
         --index
         // console.log(dataList[index][0])
         ModDate.value = dataList[index][0];
-        ModInquiry.value = dataList[index][1];
+        ModOrderNo.value = dataList[index][1];
         ModCompany.value = dataList[index][2];
-        ModOfferDate.value = dataList[index][3];
-        ModOfferNo.value = dataList[index][4];
-        ModOfferValue.value= dataList[index][5];
+        ModDispatchDate.value = dataList[index][3];
+        ModDispatchValue.value = dataList[index][4];
+        
+        // ModOfferValue.value= dataList[index][5];
         // ModSalesPerson.value = dataList[index][6];
-        ModStatus.value = dataList[index][6];
+        ModStatus.value = dataList[index][5];
         BTNModAdd.style.display = 'none';
         BTNModUpd.style.display = 'inline-block';
         BTNModDel.style.display = 'inline-block';
@@ -138,14 +138,13 @@ function FillTboxes(index){
 
 function AddStd(){
     console.log(ModDate.value)
-    firebase.database().ref("offer-inquiry/"+ModDate.value).set(
+    firebase.database().ref("order-dispatch/"+ModDate.value).set(
     {
         date : ModDate.value,
         company : ModCompany.value,
-        inquiry : ModInquiry.value,
-        offer : ModOfferNo.value,
-        offer_date: ModOfferDate.value,
-        offer_value : ModOfferValue.value,
+        orderno : ModOrderNo.value,
+        dispatch_date : ModDispatchDate.value,
+        dispatch_value: ModDispatchValue.value,
         // sales_person:ModSalesPerson.value,
         status : ModStatus.value
     },
@@ -156,27 +155,33 @@ function AddStd(){
         else{
             $("#exampleModalCenter").modal('hide');
             alert("Record Was Added")
-            window.location.reload()
+            alert('Please Wait for 5 Seconds')
+            document.getElementById('loader').style.display = "block"
+            document.getElementById('main').style.display = "none"
+            setTimeout(function() {
+                //your code here
+                reload()
+               }, 5000);
+            
             
             
         }
     }
     )
-    window.location.reload()
+    // window.location.reload()
 }
 
 
 
 function UpdStd(){
     console.log(ModDate.value)
-    firebase.database().ref("offer-inquiry/"+ModDate.value).update(
+    firebase.database().ref("order-dispatch/"+ModDate.value).update(
     {
         date : ModDate.value,
         company : ModCompany.value,
-        inquiry : ModInquiry.value,
-        offer : ModOfferNo.value,
-        offer_date: ModOfferDate.value,
-        offer_value : ModOfferValue.value,
+        orderno : ModOrderNo.value,
+        dispatch_date : ModDispatchDate.value,
+        dispatch_value: ModDispatchValue.value,
         // sales_person:ModSalesPerson.value,
         status : ModStatus.value
     },
@@ -187,20 +192,29 @@ function UpdStd(){
         else{
             alert("Record Was Updated")
             $("#exampleModalCenter").modal('hide');
-            SelectAllData()
+            alert('Please Wait for 5 Seconds')
+            document.getElementById('loader').style.display = "block"
+            document.getElementById('main').style.display = "none"
+
+            setTimeout(function() {
+                //your code here
+                reload()
+               }, 5000);
+            // SelectAllData()
             
         }
     }
     )
     ModDate = "";
-    ModInquiry = "";
-    ModOfferDate = "";
-    ModOfferNo = "";
-    ModOfferValue = "";
+    ModOrderNo = "";
+    ModDispatchDate = "";
+    ModDispatchValue = "";
+    // ModOfferNo = "";
+    // ModOfferValue = "";
     // ModSalesPerson = "";
     ModStatus = "";
     ModCompany = "";
-    window.location.reload()
+    // window.location.reload()
 }
 
 
@@ -209,15 +223,23 @@ function UpdStd(){
 
 function DelStd(){
     console.log(ModDate.value)
-    firebase.database().ref("offer-inquiry/"+ModDate.value).remove().then(
+    firebase.database().ref("order-dispatch/"+ModDate.value).remove().then(
         function(){
             alert("Record Was Removed")
             $("#exampleModalCenter").modal('hide');
-            SelectAllData()
+            alert('Please Wait for 5 Seconds')
+            document.getElementById('loader').style.display = "block"
+            document.getElementById('main').style.display = "none"
+
+            setTimeout(function() {
+                //your code here
+                reload()
+               }, 5000);
+            // SelectAllData()
             
         }
     )
-    window.location.reload()
+    // window.location.reload()
 }
 
 var searchbar = document.getElementById('SearchBar')
@@ -325,7 +347,7 @@ searchBtn.onclick = function(){
     else if(category.value==1)
     SearchTable('dateFeild');
     else if(category.value==2)
-    SearchTable('offer_dateFeild');
+    SearchTable('dispatch_dateFeild');
     else if(category.value==3)
     SearchTable('statusFeild');
     
@@ -359,7 +381,7 @@ function exportdata(){
         column5 = row.cells[4].innerText;
         column6 = row.cells[5].innerText;
         column7 = row.cells[6].innerText;
-        column8 = row.cells[7].innerText;
+        
 
  
     /* add a new records in the array */
@@ -372,7 +394,7 @@ function exportdata(){
                 column5,
                 column6,
                 column7,
-                column8
+                
             ]
         );
  
@@ -397,4 +419,12 @@ function exportdata(){
 
 // SearchTable('salesFeild');
 
+function reload(){
+    document.getElementById('main').style.display = "block"
 
+    document.getElementById('loader').style.display = "none";
+    window.location.reload()
+}
+function home(){
+    window.location = "index.html"
+}

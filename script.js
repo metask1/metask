@@ -62,6 +62,7 @@ function register() {
   
       // DOne
       alert('Registered Succesfully')
+      localStorage.setItem('User', full_name)
       setTimeout(function() {
         //your code here
         window.location = "login.html"
