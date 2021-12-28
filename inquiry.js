@@ -155,8 +155,15 @@ function AddStd(){
         }
         else{
             $("#exampleModalCenter").modal('hide');
+            
             alert("Record Was Added")
-            window.location.reload()
+            alert("Please Wait For 5 Seconds")
+            setTimeout(function() {
+                //your code here
+                reload()
+               }, 5000);
+            
+           
             
             
         }
@@ -186,6 +193,11 @@ function UpdStd(){
         }
         else{
             alert("Record Was Updated")
+            alert("Please Wait For 5 Seconds")
+            setTimeout(function() {
+                //your code here
+                reload()
+               }, 5000);
             $("#exampleModalCenter").modal('hide');
             SelectAllData()
             
@@ -200,7 +212,11 @@ function UpdStd(){
     // ModSalesPerson = "";
     ModStatus = "";
     ModCompany = "";
-    // window.location.reload()
+   
+}
+
+function reload(){
+    window.location.reload()
 }
 
 
@@ -212,11 +228,18 @@ function DelStd(){
     firebase.database().ref("offer-inquiry/"+ModDate.value).remove().then(
         function(){
             alert("Record Was Removed")
+            alert("Please Wait For 5 Seconds")
             $("#exampleModalCenter").modal('hide');
-            SelectAllData()
+            setTimeout(function() {
+                //your code here
+                reload()
+               }, 5000);
+            // SelectAllData()
             
         }
     )
+    
+   
     // window.location.reload()
 }
 
