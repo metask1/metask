@@ -23,10 +23,11 @@ function SelectAllData(){
                 var dispatch_date = CurrentRecord.val().dispatch_date;
                 var dispatch_value = CurrentRecord.val().dispatch_value;
                 var status = CurrentRecord.val().status;
+                var POvalue = CurrentRecord.val().po_value
                 // var sales_person = CurrentRecord.val().sales_person;
                 var company = CurrentRecord.val().company;
-                AddItemsToTable(date, orderno,  dispatch_date, dispatch_value, status, company);
-
+                AddItemsToTable(date, orderno,POvalue, dispatch_date, dispatch_value, status, company);
+                console.log(POvalue)
             }
         );
     });
@@ -34,12 +35,13 @@ function SelectAllData(){
 window.onload = SelectAllData();
 
 var dataList =[];
-function AddItemsToTable(date, orderno,  dispatch_date, dispatch_value, status, company){
+function AddItemsToTable(date, orderno,POvalue, dispatch_date, dispatch_value, status, company){
     var tbody1 = document.getElementById('tbody1');
     var trow = document.createElement('tr');
     var td8 = document.createElement('td');
     var td1 = document.createElement('td');
     var td2 = document.createElement('td');
+    var td9 = document.createElement('td');
     var td3 = document.createElement('td');
     var td4 = document.createElement('td');
     var td5 = document.createElement('td');
@@ -59,9 +61,10 @@ function AddItemsToTable(date, orderno,  dispatch_date, dispatch_value, status, 
 
 
 
-    dataList.push([date, orderno, company, dispatch_date,dispatch_value,status])
+    dataList.push([date, orderno,POvalue, company, dispatch_date,dispatch_value,status])
     td1.innerHTML = date;
     td2.innerHTML = orderno;
+    td9.innerHTML = POvalue;
     td3.innerHTML = company;
     td4.innerHTML = dispatch_date;
     // td5.innerHTML = order_date;
@@ -73,11 +76,12 @@ function AddItemsToTable(date, orderno,  dispatch_date, dispatch_value, status, 
     trow.appendChild(td8)
     trow.appendChild(td1); 
     trow.appendChild(td2); 
+    trow.appendChild(td9);
     trow.appendChild(td3); 
     trow.appendChild(td4); 
     trow.appendChild(td5); 
     trow.appendChild(td6); 
-    // trow.appendChild(td9);
+    
     // trow.appendChild(td7);
 
 
@@ -99,7 +103,7 @@ var ModDispatchDate = document.getElementById('DDMod')
 var ModDispatchValue = document.getElementById('DVMod')
 var ModStatus = document.getElementById('StatusMod')
 var ModCompany = document.getElementById('CompMod')
-// var ModSalesPerson = document.getElementById('SPMod')
+var ModPOValue = document.getElementById('POvalueMod')
 
 var BTNModAdd = document.getElementById('AddModBtn')
 var BTNModUpd = document.getElementById('UpdModBtn')
@@ -114,13 +118,14 @@ function FillTboxes(index){
         // console.log(dataList[index][0])
         ModDate.value = dataList[index][0];
         ModOrderNo.value = dataList[index][1];
-        ModCompany.value = dataList[index][2];
-        ModDispatchDate.value = dataList[index][3];
-        ModDispatchValue.value = dataList[index][4];
+        ModPOValue.value = dataList[index][2];
+        ModCompany.value = dataList[index][3];
+        ModDispatchDate.value = dataList[index][4];
+        ModDispatchValue.value = dataList[index][5];
         
         // ModOfferValue.value= dataList[index][5];
         // ModSalesPerson.value = dataList[index][6];
-        ModStatus.value = dataList[index][5];
+        ModStatus.value = dataList[index][6];
         BTNModAdd.style.display = 'none';
         BTNModUpd.style.display = 'inline-block';
         BTNModDel.style.display = 'inline-block';
@@ -143,6 +148,7 @@ function AddStd(){
         date : ModDate.value,
         company : ModCompany.value,
         orderno : ModOrderNo.value,
+        po_value : ModPOValue.value,
         dispatch_date : ModDispatchDate.value,
         dispatch_value: ModDispatchValue.value,
         // sales_person:ModSalesPerson.value,
@@ -180,6 +186,7 @@ function UpdStd(){
         date : ModDate.value,
         company : ModCompany.value,
         orderno : ModOrderNo.value,
+        po_value : ModPOValue.value,
         dispatch_date : ModDispatchDate.value,
         dispatch_value: ModDispatchValue.value,
         // sales_person:ModSalesPerson.value,
@@ -209,6 +216,7 @@ function UpdStd(){
     ModOrderNo = "";
     ModDispatchDate = "";
     ModDispatchValue = "";
+    ModPOValue = "";
     // ModOfferNo = "";
     // ModOfferValue = "";
     // ModSalesPerson = "";
@@ -381,6 +389,7 @@ function exportdata(){
         column5 = row.cells[4].innerText;
         column6 = row.cells[5].innerText;
         column7 = row.cells[6].innerText;
+        column8 = row.cells[7].innerText;
         
 
  
@@ -394,6 +403,7 @@ function exportdata(){
                 column5,
                 column6,
                 column7,
+                column8
                 
             ]
         );
