@@ -49,12 +49,14 @@ function login () {
   
       // DOne
       alert('User Logged In!!')
-      if (email == "bhowmicksomen@gmail.com"){
-        window.location = "Master.html"
-      }
-      else if (email != "bhowmicksomen@gmail.com"){
-        window.location = "index.html"
-      }
+      localStorage.setItem('User', email)
+      window.location = "index.html"
+      // if (email == "bhowmicksomen@gmail.com"){
+      //   window.location = "Master.html"
+      // }
+      // else if (email != "bhowmicksomen@gmail.com"){
+      //   window.location = "index.html"
+      // }
      
     })
     .catch(function(error) {
