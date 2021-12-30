@@ -156,13 +156,19 @@ function AddStd(){
         else{
             $("#exampleModalCenter").modal('hide');
             alert("Record Was Added")
-            window.location.reload()
+            document.getElementById('loader').style.display = "block"
+            document.getElementById('main').style.display = "none"
+            setTimeout(function() {
+                //your code here
+                reload()
+               }, 5000);
+            // window.location.reload()
             
             
         }
     }
     )
-    window.location.reload()
+    // window.location.reload()
 }
 
 
@@ -187,7 +193,13 @@ function UpdStd(){
         else{
             alert("Record Was Updated")
             $("#exampleModalCenter").modal('hide');
-            SelectAllData()
+            document.getElementById('loader').style.display = "block"
+            document.getElementById('main').style.display = "none"
+            setTimeout(function() {
+                //your code here
+                reload()
+               }, 5000);
+            // SelectAllData()
             
         }
     }
@@ -200,7 +212,7 @@ function UpdStd(){
     // ModSalesPerson = "";
     ModStatus = "";
     ModCompany = "";
-    window.location.reload()
+    // window.location.reload()
 }
 
 
@@ -213,11 +225,17 @@ function DelStd(){
         function(){
             alert("Record Was Removed")
             $("#exampleModalCenter").modal('hide');
-            SelectAllData()
+            document.getElementById('loader').style.display = "block"
+            document.getElementById('main').style.display = "none"
+            setTimeout(function() {
+                //your code here
+                reload()
+               }, 5000);
+            // SelectAllData()
             
         }
     )
-    window.location.reload()
+    // window.location.reload()
 }
 
 var searchbar = document.getElementById('SearchBar')
@@ -394,7 +412,35 @@ function exportdata(){
         link.click();
 }
 
+function reload(){
+    document.getElementById('main').style.display = "block"
 
+    document.getElementById('loader').style.display = "none";
+    window.location.reload()
+}
+
+document.getElementById("close").addEventListener("click", function() {
+    clear()
+  });
+function clear(){
+    // window.location.reload()
+    // $('#exampleModalCenter').modal('hide');
+    console.log('called')
+    ModDate.value = "";
+    console.log('cleared')
+    ModOfferDate.value = "";
+    ModInquiry.value = "";
+    ModOfferValue.value = "";
+    ModOfferNo.value = "";
+    // ModOfferNo = "";
+    // ModOfferValue = "";
+    // ModSalesPerson = "";
+    ModStatus.value = "";
+    ModCompany.value = "";
+}
 // SearchTable('salesFeild');
 
+function home(){
+    window.location = "index.html"
+}
 

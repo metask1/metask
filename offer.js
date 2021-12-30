@@ -35,6 +35,12 @@ function SelectAllData(){
 window.onload = SelectAllData();
 
 var dataList =[];
+
+
+function home(){
+    window.location = window.location = "index.html"
+}
+
 function AddItemsToTable(date, orderno,POvalue, dispatch_date, dispatch_value, status, company){
     var tbody1 = document.getElementById('tbody1');
     var trow = document.createElement('tr');
@@ -437,4 +443,24 @@ function reload(){
 }
 function home(){
     window.location = "index.html"
+}
+
+document.getElementById("close").addEventListener("click", function() {
+    clear()
+  });
+function clear(){
+    // window.location.reload()
+    // $('#exampleModalCenter').modal('hide');
+    console.log('called')
+    ModDate.value = "";
+    console.log('cleared')
+    ModOrderNo.value = "";
+    ModDispatchDate.value = "";
+    ModDispatchValue.value = "";
+    ModPOValue.value = "";
+    // ModOfferNo = "";
+    // ModOfferValue = "";
+    // ModSalesPerson = "";
+    ModStatus.value = "";
+    ModCompany.value = "";
 }
