@@ -137,6 +137,11 @@ function FillTboxes(index){
 
 
 function AddStd(){
+    if(ModDate.value == ""){
+        // alert('Please Give The Date')
+        throw new Error("This is your custom error message");
+    }
+    
     console.log(ModDate.value)
     firebase.database().ref("offer-inquiry/"+ModDate.value).set(
     {

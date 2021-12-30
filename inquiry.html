@@ -89,7 +89,6 @@
             <th>Offer Date</th>
             <th>Offer No.</th>
             <th>Offer Value</th>
-            <!-- <th>Sales Person</th> -->
             <th>Status</th>
             <th>Control Center</th>
         </thead>
@@ -110,29 +109,33 @@
       </button>
     </div>
     <div class="modal-body">
-     <label class="labs">Inquiry Date : </label>
-     <input type="text" id="DateMod" tabindex="1"> <br>
-     <label class="labs">Inquiry No : </label>
-     <input type="text" id="InqMod"tabindex="1"> <br>
-     <label class="labs">Company : </label>
-     <input type="text" id="CompMod"tabindex="1"> <br>
-     <label class="labs">Offer Date  : </label>
-     <input type="text" id="OFMod"tabindex="1"> <br>
-     <label class="labs">Offer No : </label>
-     <input type="text" id="ONMod"tabindex="1"> <br>
-     <label class="labs">Offer Value : </label>
-     <input type="text" id="OVMod"tabindex="1"> <br>
-     <!-- <label class="labs">Sales Person : </label>
-     <input type="text" id="SPMod"tabindex="1"> <br> -->
-     <label class="labs">Status : </label>
-     <input type="text" id="StatusMod"tabindex="1"> <br>
+      <form>
+        <label class="labs">Inquiry Date : </label>
+        <input type="text" id="DateMod" tabindex="1" required> <br>
+        <label class="labs">Inquiry No : </label>
+        <input type="text" id="InqMod"tabindex="1"> <br>
+        <label class="labs">Company : </label>
+        <input type="text" id="CompMod"tabindex="1"> <br>
+        <label class="labs">Offer Date  : </label>
+        <input type="text" id="OFMod"tabindex="1"> <br>
+        <label class="labs">Offer No : </label>
+        <input type="text" id="ONMod"tabindex="1"> <br>
+        <label class="labs">Offer Value : </label>
+        <input type="text" id="OVMod"tabindex="1"> <br>
+        <!-- <label class="labs">Sales Person : </label>
+        <input type="text" id="SPMod"tabindex="1"> <br> -->
+        <label class="labs">Status : </label>
+        <input type="text" id="StatusMod"tabindex="1"> <br>
+        
+          <button id="AddModBtn" type="submit" class="btn btn-primary" onclick="AddStd()" type="submit" >Add New Record</button>
+          <button id="UpdModBtn" type="button" class="btn btn-success" onclick = "UpdStd()"type="submit">Update Record</button>
+          <button id="DelModBtn" type="button" class="btn btn-danger"onclick = "DelStd()"type="submit">Delete Record</button>
+    
+        
+      </form>
+     
     </div>
-    <div class="modal-footer">
-      <button id="AddModBtn" type="button" class="btn btn-primary" onclick="AddStd()">Add New Record</button>
-      <button id="UpdModBtn" type="button" class="btn btn-success" onclick = "UpdStd()">Update Record</button>
-      <button id="DelModBtn" type="button" class="btn btn-danger"onclick = "DelStd()">Delete Record</button>
-
-    </div>
+   
   </div>
 </div>
 </div>

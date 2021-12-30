@@ -435,32 +435,3 @@ function exportdata(){
 
 // SearchTable('salesFeild');
 
-function reload(){
-    document.getElementById('main').style.display = "block"
-
-    document.getElementById('loader').style.display = "none";
-    window.location.reload()
-}
-function home(){
-    window.location = "index.html"
-}
-
-document.getElementById("close").addEventListener("click", function() {
-    clear()
-  });
-function clear(){
-    // window.location.reload()
-    // $('#exampleModalCenter').modal('hide');
-    console.log('called')
-    ModDate.value = "";
-    console.log('cleared')
-    ModOrderNo.value = "";
-    ModDispatchDate.value = "";
-    ModDispatchValue.value = "";
-    ModPOValue.value = "";
-    // ModOfferNo = "";
-    // ModOfferValue = "";
-    // ModSalesPerson = "";
-    ModStatus.value = "";
-    ModCompany.value = "";
-}
