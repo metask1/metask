@@ -1,13 +1,29 @@
 var User = localStorage.getItem('User')
 
 function Inquiry(){
-    window.location = 'inquiry.html'
+    if(User != null){
+        window.location = 'inquiry.html'
+    }
+    else{
+        window.alert("Please Login Or Register First")
+    }
+    
 }
 function Order(){
-    window.location = 'offer.html'
+    if(User != null){
+        window.location = 'offer.html'
+    }
+    else{
+        window.alert("Please Login Or Register First")
+    }
 }
 function Offer(){
-    window.location = 'Offer.html'
+    if(User != null){
+        window.location = 'Offer.html'
+    }
+    else{
+        window.alert("Please Login Or Register First")
+    }
 }
 function login(){
     window.location = "login.html"

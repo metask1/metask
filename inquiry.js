@@ -123,7 +123,7 @@ function FillTboxes(index){
         ModStatus.value = dataList[index][6];
         BTNModAdd.style.display = 'none';
         BTNModUpd.style.display = 'inline-block';
-        BTNModDel.style.display = 'inline-block';
+        BTNModDel.style.display = 'winline-block';
     }
     else{
         BTNModAdd.style.display = 'inline-block';
