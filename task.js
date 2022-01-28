@@ -19,9 +19,10 @@ function SelectAllData(){
             function(CurrentRecord){
                 var name = CurrentRecord.val().name;
                 var date = CurrentRecord.val().date;
-                var task = CurrentRecord.val().task;
+                var task_given = CurrentRecord.val().task_given;
+                var task_taken = CurrentRecord.val().task_taken;
                 var status = CurrentRecord.val().status;
-                AddItemsToTable(name, date, task, status);
+                AddItemsToTable(name, date, task_given,task_taken, status);
 
             }
         );
@@ -30,7 +31,7 @@ function SelectAllData(){
 window.onload = SelectAllData();
 
 var dataList =[];
-function AddItemsToTable(name, date, task, status){
+function AddItemsToTable(name, date, task_given, task_taken, status){
     var tbody1 = document.getElementById('tbody1');
     var trow = document.createElement('tr');
     var td8 = document.createElement('td');
@@ -38,6 +39,8 @@ function AddItemsToTable(name, date, task, status){
     var td2 = document.createElement('td');
     var td3 = document.createElement('td');
     var td4 = document.createElement('td');
+    var td5 = document.createElement('td');
+
     // var td5 = document.createElement('td');
     // var td6 = document.createElement('td');
     // var td9 = document.createElement('td');
@@ -45,8 +48,8 @@ function AddItemsToTable(name, date, task, status){
     
     td1.classList +="nameFeild"
     td2.classList +="dateFeild"
-    td3.classList +="taskFeild"
-    td4.classList +="statusFeild"
+    // td3.classList +="taskFeild"
+    td5.classList +="statusFeild"
     // td5.classList +="offer_valueFeild"
     // td7.classList +="statusFeild"
     // td6.classList +="companyFeild"
@@ -55,11 +58,12 @@ function AddItemsToTable(name, date, task, status){
 
 
 
-    dataList.push([name, date, task, status])
+    dataList.push([name, date, task_given, task_taken, status])
     td1.innerHTML = name;
     td2.innerHTML = date;
-    td3.innerHTML = task;
-    td4.innerHTML = status;
+    td3.innerHTML = task_given;
+    td4.innerHTML = task_taken
+    td5.innerHTML = status;
     td8.innerHTML = ++srno;
     // td9.innerHTML = sales_person;
 
@@ -68,7 +72,7 @@ function AddItemsToTable(name, date, task, status){
     trow.appendChild(td2); 
     trow.appendChild(td3); 
     trow.appendChild(td4); 
-    // trow.appendChild(td5); 
+    trow.appendChild(td5); 
     // trow.appendChild(td6); 
     // // trow.appendChild(td9);
     // trow.appendChild(td7);
@@ -88,7 +92,8 @@ function AddItemsToTable(name, date, task, status){
 
 var ModName = document.getElementById('nameMod')
 var ModDate = document.getElementById('dateMod')
-var ModTask = document.getElementById('taskMod')
+var ModTask_given = document.getElementById('task_giveMod')
+var ModTask_taken = document.getElementById('task_takeMod')
 var ModStatus = document.getElementById('StatusMod')
 
 // var ModSalesPerson = document.getElementById('SPMod')
@@ -106,8 +111,9 @@ function FillTboxes(index){
         // console.log(dataList[index][0])
         ModName.value = dataList[index][0];
         ModDate.value = dataList[index][1];
-        ModTask.value = dataList[index][2];
-        ModStatus.value = dataList[index][3];
+        ModTask_given.value = dataList[index][2];
+        ModTask_taken.value = dataList[index[3]];
+        ModStatus.value = dataList[index][4];
        
         BTNModAdd.style.display = 'none';
         BTNModUpd.style.display = 'inline-block';
@@ -125,12 +131,23 @@ function FillTboxes(index){
 
 
 function AddStd(){
+    if(ModDate.value == ""){
+        alert("Please Enter The Date")
+        throw new console.error("Chup");
+    }
+    // if(ModTask_taken.value == null){
+    //     ModTask_taken.value = "Not Given"
+    // }
+    // if(ModTask_given.value == null){
+    //     ModTask_given.value = "Not Given"
+    // }
     console.log(ModDate.value)
     firebase.database().ref("task/"+ModDate.value).set(
     {
         name : ModName.value,
         date : ModDate.value,
-        task : ModTask.value,
+        task_given : ModTask_given.value,
+        task_taken : ModTask_taken.value,
         status : ModStatus.value
     },
     (error) =>{
@@ -153,7 +170,8 @@ function AddStd(){
     )
     ModDate = "";
     ModName = "";
-    ModTask = "";
+    ModTask_given = "";
+    ModTask_taken = "";
     ModStatus = "";
     // window.location.reload()
 }
@@ -161,6 +179,12 @@ function AddStd(){
 
 
 function UpdStd(){
+    // if(ModTask_taken.value == null){
+    //     ModTask_taken.value = "Not Given"
+    // }
+    // if(ModTask_given.value == null){
+    //     ModTask_given.value = "Not Given"
+    // }
     console.log(ModDate.value)
     firebase.database().ref("task/"+ModDate.value).update(
     {
@@ -186,12 +210,19 @@ function UpdStd(){
     )
     ModDate = "";
     ModName = "";
-    ModTask = "";
+    ModTask_given = "";
+    ModTask_taken = "";
     ModStatus = "";
     // window.location.reload()
 }
 
 function DelStd(){
+    // if(ModTask_taken.value == null){
+    //     ModTask_taken.value = "Not Given"
+    // }
+    // if(ModTask_given.value == null){
+    //     ModTask_given.value = "Not Given"
+    // }
     console.log(ModDate.value)
     firebase.database().ref("task/"+ModDate.value).remove().then(
         function(){
