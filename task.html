@@ -1,0 +1,143 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script> 
+    <!-- <script src="inquiry.js"></script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        .labs{
+            display: inline-block;
+            width: 100px;
+        }
+        body{
+            background-color: #0093E9;
+            background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+
+        }
+
+        .loader {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: none;
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 120px;
+          height: 120px;
+          -webkit-animation: spin 2s linear infinite; /* Safari */
+          animation: spin 2s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+    </style>
+</head>
+<body>
+  <div style="padding-bottom: 20px;">
+    <button class="btn btn-success" onclick="home()" >Back To Home</button>
+  </div>
+ 
+  
+  <div class="loader" id="loader"></div>
+  <button class="gyphicon gyphicon-download btn-success"  onclick="exportdata()">Export Data To Excel</button>
+<div id="main">
+  <div class="container mb-3"">
+    <div class="input-group mb-3 mt-3">
+        <input id ="SearchBar" type="text" class="form-control" placeholder="Search A Record" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <select class="custom-select" id="CategorySelected">
+                
+                <option selected value="1">Date</option>
+                <option value="2">Task</option>
+                <option value="3">Status</option>
+                <!-- <option value="4">Sales Person</option> -->
+            </select>
+          <button id = "SearchBtn" class="btn btn-primary ml-1"  type="button">Search</button>
+        </div>
+      </div>
+    <table class="table table-dark text-white" style="border-radius: 10px;" id="table">
+      <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#exampleModalCenter" onclick = "FillTboxes(null)">New Data</button>
+        <thead>
+            <th>No.</th>
+            <th>Name: </th>
+            <th>DateAssigned</th>
+            <th>Task</th>
+            <th>Status</th>
+            <th>Control Center</th>
+        </thead>
+        <tbody id="tbody1">
+             
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLongTitle">Control Panel</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clear()" id="close">
+        <span aria-hidden="true"onclick="clear()">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <label class="labs">Name : </label>
+        <input type="text" id="nameMod" tabindex="1" required> <br>
+        <label class="labs">Date Assigned : </label>
+        <input type="text" id="dateMod"tabindex="1"> <br>
+        <label class="labs">Task : </label>
+        <input type="text" id="taskMod"tabindex="1"> <br>
+        <label class="labs">Status : </label>
+        <input type="text" id="StatusMod"tabindex="1"> <br>
+        
+          <button id="AddModBtn" type="button" class="btn btn-primary" onclick="AddStd()" type="submit" >Add New Record</button>
+          <button id="UpdModBtn" type="button" class="btn btn-success" onclick = "UpdStd()"type="submit">Update Record</button>
+          <button id="DelModBtn" type="button" class="btn btn-danger"onclick = "DelStd()"type="submit">Delete Record</button>
+    
+        
+      </form>
+     
+    </div>
+   
+  </div>
+</div>
+</div>
+
+</div>
+</div>
+   
+
+
+<div id="piechart"></div>
+
+<script src="task.js"></script>
+
+</body>
+
+</html>

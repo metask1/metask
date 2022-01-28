@@ -9,6 +9,15 @@ function Inquiry(){
     }
     
 }
+function Task(){
+    if(User != null){
+        window.location = 'task.html'
+    }
+    else{
+        window.alert("Please Login Or Register First")
+    }
+    
+}
 function Order(){
     if(User != null){
         window.location = 'offer.html'
