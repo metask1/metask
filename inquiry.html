@@ -111,7 +111,7 @@
     <div class="modal-body">
       <form>
         <label class="labs">Inquiry Date : </label>
-        <input type="text" id="DateMod" tabindex="1" required> <br>
+        <input type="text" id="DateMod" tabindex="1"> <br>
         <label class="labs">Inquiry No : </label>
         <input type="text" id="InqMod"tabindex="1"> <br>
         <label class="labs">Company : </label>
@@ -128,6 +128,8 @@
         <input type="text" id="StatusMod"tabindex="1"> <br>
         
           <button id="AddModBtn" type="submit" class="btn btn-primary" onclick="AddStd()" type="submit" >Add New Record</button>
+          <button id="CheckModBtn"  class="btn btn-primary" onclick="check()" type="button">Check For Availibility</button>
+
           <button id="UpdModBtn" type="button" class="btn btn-success" onclick = "UpdStd()"type="submit">Update Record</button>
           <button id="DelModBtn" type="button" class="btn btn-danger"onclick = "DelStd()"type="submit">Delete Record</button>
     
